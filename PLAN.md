@@ -90,17 +90,17 @@ Automation-Cypress/
 
 Mirror of C# `Base/` + `Base/Actions/`. No page code yet; verify by typecheck/lint only.
 
-1. [ ] `validation-result.ts`: `ValidationResult` class (or interface) with `passed: boolean`, `message: string`; static helpers `ok(message)` / `fail(message)`
-2. [ ] `base-locators.ts`: abstract `BaseLocators` holding shared selectors used by multiple pages (e.g., nav buttons); per-page locator classes extend it
-3. [ ] `i-page.ts` + `page-factory.ts`: page contract and factory that builds a page bound to `baseUrl` (mirrors `IPage.cs`, `PageFactory.cs`)
-4. [ ] `base-page.ts`: abstract `BasePage<TLocators>` — holds locator instance, exposes `visit(path)` and shared navigation helpers
-5. [ ] `actions/` — one file per raw operation, each a small exported function wrapping Cypress commands:
-   - [ ] `click.ts`, `type-text.ts`, `wait.ts` (visible/enabled), `scroll.ts`, `toggle.ts`, `select.ts`, `read-text.ts`, `get-value.ts`
-6. [ ] `base-actor.ts`: abstract `BaseActor<TLocators>` — composes actions; no direct `cy.*` calls beyond what actions expose
-7. [ ] `base-validator.ts`: abstract `BaseValidator<TLocators>` — returns `ValidationResult`; never throws for expected-failure cases
-8. [ ] `base-coordinator.ts`: abstract `BaseCoordinator<TPage>` — orchestrates actors + validators; no locators, no raw actions
+1. [x] `validation-result.ts`: `ValidationResult` class with `passed: boolean`, `message: string`; static helpers `ok(message)` / `fail(message)`
+2. [x] `base-locators.ts`: abstract `BaseLocators` holding shared selectors used by multiple pages (e.g., nav buttons); per-page locator classes extend it
+3. [x] `i-page.ts` + `page-factory.ts`: page contract and factory that builds a page bound to `baseUrl` (mirrors `IPage.cs`, `PageFactory.cs`). `getByRole` / `getByLabelText` / `getByTestId` are backed by `@testing-library/cypress` (`cy.findBy*`), imported in `cypress/support/e2e.ts`
+4. [x] `base-page.ts`: abstract `BasePage<TLocators>` — holds locator instance, exposes `visit(path)` and shared navigation helpers (`goToSection`)
+5. [x] `actions/` — one file per raw operation, each a small exported function wrapping Cypress commands:
+   - [x] `click.ts`, `type-text.ts`, `wait.ts` (visible/enabled), `scroll.ts`, `toggle.ts`, `select.ts`, `read-text.ts`, `get-value.ts`
+6. [x] `base-actor.ts`: abstract `BaseActor<TLocators>` — composes actions; no direct `cy.*` calls beyond what actions expose
+7. [x] `base-validator.ts`: abstract `BaseValidator<TLocators>` — returns `ValidationResult`; never throws for expected-failure cases
+8. [x] `base-coordinator.ts`: abstract `BaseCoordinator<TPage>` — orchestrates actors + validators; no locators, no raw actions
 
-**Verify:** `npm run typecheck && npm run lint` clean (no specs yet to run).
+**Verify:** `npm run typecheck && npm run lint` clean (no specs yet to run). Done 2026-10-07: typecheck clean, lint clean, smoke spec still green.
 
 ## Phase 2 — UI Elements: Basic Elements (`pages/ui-elements/`)
 
@@ -178,4 +178,5 @@ Validation-focused; all forms are `novalidate`, so expected messages must be cap
 ## Status
 
 - Phase 0: complete (2026-10-07) — scaffolding, config, docs ported, smoke spec green
-- Phases 1–6: pending
+- Phase 1: complete (2026-10-07) — base classes (`i-page`, `page-factory`, `base-*`) and raw actions in `src/framework/base/`
+- Phases 2–6: pending
