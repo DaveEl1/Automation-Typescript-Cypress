@@ -1,0 +1,195 @@
+# Coding Standards Specification
+
+## 1. SOLID Principles
+
+### Single Responsibility Principle (SRP)
+- Each class, module, or function must have one, and only one, reason to change
+- A class should have a single responsibility, encapsulated entirely within that class
+- Maximum 3 responsibilities per class
+- If a method does more than one thing, split it into separate methods
+
+### Open/Closed Principle (OCP)
+- Software entities (classes, modules, functions) should be open for extension but closed for modification
+- Use interfaces and abstract classes to define contracts
+- Add new behavior through inheritance or composition, not by modifying existing code
+- Prefer strategy patterns over conditional logic for varying behavior
+
+### Liskov Substitution Principle (LSP)
+- Subtypes must be substitutable for their base types without altering program correctness
+- Derived classes must not strengthen preconditions or weaken postconditions
+- No unexpected exceptions thrown by subclasses
+- Preserve invariants from base classes
+
+### Interface Segregation Principle (ISP)
+- Clients should not be forced to depend on interfaces they do not use
+- Keep interfaces small and focused on specific client needs
+- Maximum 5 methods per interface
+- Split fat interfaces into smaller, more specific ones
+
+### Dependency Inversion Principle (DIP)
+- High-level modules must not depend on low-level modules; both must depend on abstractions
+- Abstractions must not depend on details; details must depend on abstractions
+- Inject dependencies through constructors, not through service locators or new operators
+- Depend on interfaces, not concrete implementations
+
+## 2. DRY Principles (Don't Repeat Yourself)
+
+### Code Deduplication
+- Any logic repeated more than twice must be extracted into a shared function or module
+- Maximum 2 identical or near-identical code blocks before refactoring
+- Use helper functions, utility classes, or base classes to eliminate duplication
+- Configuration values must be centralized, not hardcoded
+
+### Abstraction Boundaries
+- When extracting shared code, ensure the abstraction level matches the callers
+- Do not create premature abstractions for single-use code
+- Shared code must benefit at least 3 call sites before extraction
+
+## 3. Test Driven Development (TDD)
+
+### Red-Green-Refactor Cycle
+- Write failing tests before writing implementation code (Red)
+- Write minimal code to make the test pass (Green)
+- Refactor the code while keeping all tests passing (Refactor)
+- Never write production code without a failing test first
+
+### Test Coverage Requirements
+- Minimum 80% code coverage for all production code
+- 100% coverage for business logic and utility functions
+- All public methods must have at least one test
+- All edge cases and error paths must be tested
+
+### Test Structure (Arrange-Act-Assert)
+- Arrange: Set up test fixtures and preconditions
+- Act: Execute the code under test
+- Assert: Verify the expected outcomes
+- Each test must test exactly one behavior or scenario
+
+### Test Naming Conventions
+- Test names must describe the behavior: `WhenX_ThenY` or `ShouldY_WhenX`
+- Tests must be self-documenting and readable without implementation knowledge
+- Group related tests using descriptive test class/method names
+
+### Test Isolation
+- Tests must not depend on execution order
+- Each test must set up and clean up its own state
+- No shared mutable state between tests
+- Mock external dependencies (databases, APIs, file systems)
+
+## 4. Code Readability and Structure
+
+### Method Size Limits
+- Maximum method length: 30 lines of code
+- Ideal method length: 10-15 lines
+- If a method exceeds 30 lines, it must be split into smaller methods
+- Each extracted method must have a descriptive name that explains its purpose
+
+### Nesting Depth Limits
+- Maximum nesting depth: 3 levels (if/for/try blocks)
+- Ideal nesting depth: 1-2 levels
+- Use early returns to reduce nesting (guard clauses)
+- Extract deeply nested logic into separate methods
+
+### Example: Guard Clauses
+```
+// Bad
+function processUser(user) {
+    if (user) {
+        if (user.active) {
+            if (user.verified) {
+                // do something
+            }
+        }
+    }
+}
+
+// Good
+function processUser(user) {
+    if (!user) return;
+    if (!user.active) return;
+    if (!user.verified) return;
+    // do something
+}
+```
+
+### Cognitive Load
+- Maximum 5 parameters per method (use an options object if more needed)
+- Maximum 3 local variables per method before extracting
+- Function must be understandable in a single reading (under 30 seconds)
+
+### File Size Limits
+- Maximum file length: 400 lines of code
+- If a file exceeds 400 lines, split by concern or feature
+- One class per file (except for small related helper classes)
+
+## 5. Naming Conventions
+
+### General Rules
+- Names must reveal intent: a name should explain why it exists, what it does, and how it is used
+- Avoid abbreviations unless universally understood (e.g., `id`, `url`)
+- Use domain terminology consistently
+- Names must be pronounceable
+
+### Specific Conventions
+- Classes: PascalCase, nouns (e.g., `UserRepository`, `OrderProcessor`)
+- Interfaces: PascalCase, prefixed with `I` or use adjective/descriptor (e.g., `IRepository`, `Serializable`)
+- Methods: camelCase, verbs or verb phrases (e.g., `getUserById`, `calculateTotal`)
+- Variables: camelCase, descriptive nouns (e.g., `userList`, `orderCount`)
+- Constants: UPPER_SNAKE_CASE (e.g., `MAX_RETRY_COUNT`, `DEFAULT_TIMEOUT`)
+- Private fields: camelCase with underscore prefix (e.g., `_userRepository`)
+- Booleans: prefixed with `is`, `has`, `can`, `should` (e.g., `isActive`, `hasPermission`)
+
+## 6. Error Handling
+
+### Exception Safety
+- Never swallow exceptions silently
+- Always log the error context (message, stack trace, relevant data)
+- Throw specific, descriptive exceptions (not generic Exception/Error)
+- Catch only what you can handle; rethrow what you cannot
+
+### Validation
+- Validate inputs at method boundaries
+- Fail fast: validate before processing
+- Provide clear, actionable error messages
+
+## 7. Documentation
+
+### Code Comments
+- Comments must explain why, not what
+- Do not comment obvious code
+- Document public APIs, complex algorithms, and non-obvious decisions
+- Keep comments up to date with code changes
+
+### Documentation Standards
+- Public methods must have documentation describing: purpose, parameters, return value, exceptions
+- Complex business rules must be documented inline
+- Architecture decisions must be documented in a decision log
+
+## 8. Code Review Checklist
+
+Every pull request must satisfy:
+- [ ] All tests pass
+- [ ] Test coverage meets minimum requirements
+- [ ] No method exceeds 30 lines
+- [ ] No nesting exceeds 3 levels
+- [ ] No file exceeds 400 lines
+- [ ] All repeated logic has been extracted (DRY)
+- [ ] SOLID principles are followed
+- [ ] Naming conventions are applied
+- [ ] No hardcoded configuration values
+- [ ] Error handling is comprehensive
+- [ ] Documentation is up to date
+
+## 9. Refactoring Guidelines
+
+### When to Refactor
+- Before adding new features to complex code
+- When fixing bugs in hard-to-understand code
+- When test coverage is insufficient
+- When code review reveals violations of these standards
+
+### Refactoring Rules
+- Refactor in small, incremental steps
+- Run tests after every change
+- Never refactor and add features in the same commit
+- Preserve existing behavior during refactoring
