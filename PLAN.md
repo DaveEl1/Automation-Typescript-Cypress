@@ -49,10 +49,10 @@ Automation-Cypress/
 - **TypeScript**: `strict: true`, no `any` unless unavoidable; explicit return types on exported functions/classes.
 - **Files**: kebab-case filenames, one class/function per file, PascalCase classes, camelCase methods/variables, UPPER_SNAKE_CASE constants (per `coding standards.txt`).
 - **Layering** (from REQUIREMENTS.md — journey code never mixes with action code):
-  - *action* = raw Cypress operation (`cy.click()`, `cy.type()`, …) in `base/actions/*.ts`.
-  - *actor* = user-level operation built from actions.
-  - *validator* = post-action check returning a `ValidationResult`.
-  - *coordinator* = workflow combining actors/validators; never touches locators or raw actions directly.
+  - _action_ = raw Cypress operation (`cy.click()`, `cy.type()`, …) in `base/actions/*.ts`.
+  - _actor_ = user-level operation built from actions.
+  - _validator_ = post-action check returning a `ValidationResult`.
+  - _coordinator_ = workflow combining actors/validators; never touches locators or raw actions directly.
 - **Locators**: prefer `data-testid`, then id, then role+name (per test plan). Selector strings live only in locator files/classes; everything else receives them via the page's locator instance.
 - **Tests** (`cypress/e2e/*.cy.ts`): drive coordinators only — specs never call raw actions. One spec per section. Test names describe behavior: `Should…When…` / `When…Then…`. Each test sets up its own state (fresh visit in `beforeEach`); no shared mutable state between tests.
 - **Waiting**: rely on Cypress auto-waiting assertions; never bare `cy.wait(ms)`. Use `cy.intercept` only if a flow needs API stubbing.
