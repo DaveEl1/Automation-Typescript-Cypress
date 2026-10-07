@@ -1,0 +1,23 @@
+{
+  "name": "automation-cypress",
+  "version": "1.0.0",
+  "description": "Cypress + TypeScript E2E test framework for the Reach Catalog SPA (http://localhost:5173/)",
+  "private": true,
+  "scripts": {
+    "test": "cypress run",
+    "test:open": "cypress open",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.4",
+    "cypress": "^16.1.1",
+    "eslint": "^10.12.0",
+    "prettier": "^3.9.9",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.71.1"
+  }
+}

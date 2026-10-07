@@ -69,22 +69,22 @@ Automation-Cypress/
 ## Phase 0 — Scaffolding & smoke test
 
 1. Initialize project
-   - [ ] `npm init -y`; set `"private": true`, add scripts: `test` (`cypress run`), `test:open` (`cypress open`), `typecheck` (`tsc --noEmit`), `lint` (`eslint .`), `format` (`prettier --write .`)
-   - [ ] Install dev deps: `cypress`, `typescript`, `@types/node`, `eslint`, `typescript-eslint`, `prettier`
+   - [x] `npm init -y`; set `"private": true`, add scripts: `test` (`cypress run`), `test:open` (`cypress open`), `typecheck` (`tsc --noEmit`), `lint` (`eslint .`), `format` (`prettier --write .`)
+   - [x] Install dev deps: `cypress`, `typescript`, `@types/node`, `eslint`, `typescript-eslint`, `prettier` (+ `@eslint/js` for the flat config)
 2. TypeScript + lint setup
-   - [ ] `tsconfig.json`: `strict: true`, target ES2022, `esModuleInterop`, paths alias `"@framework/*": ["src/framework/*"]` (Cypress resolves tsconfig paths in specs natively)
-   - [ ] `eslint.config.mjs` with typescript-eslint recommended rules; `.prettierrc` (single quotes, semicolons, 100-col)
+   - [x] `tsconfig.json`: `strict: true`, target ES2022, `esModuleInterop`, paths alias `"@framework/*": ["./src/framework/*"]` (Cypress resolves tsconfig paths in specs natively; TS 6 requires the `./` prefix without `baseUrl`)
+   - [x] `eslint.config.mjs` with typescript-eslint recommended rules; `.prettierrc` (single quotes, semicolons, 100-col)
 3. Cypress setup
-   - [ ] `cypress.config.ts`: `baseUrl: 'http://localhost:5173'`, default viewport, reasonable timeouts
-   - [ ] Create folder skeleton exactly as in the target layout above
+   - [x] `cypress.config.ts`: `baseUrl: 'http://localhost:5173'`, default viewport, reasonable timeouts
+   - [x] Create folder skeleton exactly as in the target layout above
 4. Port documentation from reference project
-   - [ ] Copy `docs/site-notes.md` and `docs/test-plan.md` from `C:\Dev\automation`; adapt test-plan commands (`dotnet test …` → `npx cypress run --spec …`) and reset all TC statuses to pending (this repo has no completed cases yet)
+   - [x] Copy `docs/site-notes.md` and `docs/test-plan.md` from `C:\Dev\automation`; adapt test-plan commands (`dotnet test …` → `npx cypress run --spec …`) and reset all TC statuses to pending (this repo has no completed cases yet)
 5. Smoke spec
-   - [ ] `cypress/e2e/smoke.cy.ts`: browser launches, visits `/`, asserts the home heading is visible
+   - [x] `cypress/e2e/smoke.cy.ts`: browser launches, visits `/`, asserts the home heading is visible
 6. Housekeeping
-   - [ ] Update `AGENTS.md` to describe this Cypress/TS project (commands: `npm run test`, `npx cypress run --spec …`; remove .NET/Playwright notes)
+   - [x] Update `AGENTS.md` to describe this Cypress/TS project (commands: `npm run test`, `npx cypress run --spec …`; remove .NET/Playwright notes)
 
-**Verify:** `npm run typecheck && npm run lint && npx cypress run --spec cypress/e2e/smoke.cy.ts` → green.
+**Verify:** `npm run typecheck && npm run lint && npx cypress run --spec cypress/e2e/smoke.cy.ts` → green. Done 2026-10-07: typecheck clean, lint clean, smoke spec 1 passing.
 
 ## Phase 1 — Base classes & actions (`src/framework/base/`)
 
@@ -177,5 +177,5 @@ Validation-focused; all forms are `novalidate`, so expected messages must be cap
 
 ## Status
 
-- Phase 0: pending (repo currently contains only docs — no code yet)
+- Phase 0: complete (2026-10-07) — scaffolding, config, docs ported, smoke spec green
 - Phases 1–6: pending
