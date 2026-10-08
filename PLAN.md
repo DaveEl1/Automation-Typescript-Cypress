@@ -112,7 +112,7 @@ Mirror of C# `Base/` + `Base/Actions/`. No page code yet; verify by typecheck/li
 
 Status: items 3–5 done; basic-elements spec written and verified against the live site (5 passing). Site notes updated with observed checkbox/radio behavior. Stopping for review before remaining TCs / Phase 3+.
 6. [ ] `cypress/e2e/ui-elements.cy.ts` — one test per TC, driving coordinators only:
-   - [ ] TC-UIE-01 Text Field: type known string into `ui-text-field` → output shows `Output: <text>`
+    - [x] TC-UIE-01 Text Field: type known string into `ui-text-field` → output shows `Output: <text>` (verified 2026-10-08)
    - [ ] TC-UIE-02 Checkbox: toggle off then on → output tracks both states
    - [ ] TC-UIE-03 Radio Buttons: select A/B/C in turn → output shows selected option
 
