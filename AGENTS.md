@@ -39,7 +39,7 @@ Dependencies are npm packages declared in `package.json`. `REQUIREMENTS.md` is t
 
 ## Setup gotchas
 
-- Node 20+ LTS required. Cypress browsers are installed automatically by the npm package on first run; verify with `npx cypress verify`. If tests fail with "browser not found", re-run that (or `npx cypress cache prune` and reinstall).
+- Node 20+ LTS required. E2e runs use Chrome, pinned in `cypress.config.ts`; if it is missing, install it or override with `--browser`. Cypress's bundled Electron browser installs automatically on first run; verify with `npx cypress verify`. If tests fail with "browser not found", re-run that (or `npx cypress cache prune` and reinstall).
 - Browsers live in `%LOCALAPPDATA%\Cypress\Cache` — outside the repo, so nothing to gitignore for them.
 - The Reach Catalog dev server must be running at http://localhost:5173/ before any spec runs.
 

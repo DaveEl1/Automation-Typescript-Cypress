@@ -11,7 +11,11 @@ const RADIO_OUTPUT_PREFIX = 'Selected: ';
 
 export class UiElementsValidator extends BaseValidator<UiElementsLocators> {
   textFieldOutputMatches(expected: string): Cypress.Chainable<ValidationResult> {
-    return this.outputShows(this.locators.textFieldOutput(), `${OUTPUT_PREFIX}${expected}`, 'text field');
+    return this.outputShows(
+      this.locators.textFieldOutput(),
+      `${OUTPUT_PREFIX}${expected}`,
+      'text field',
+    );
   }
 
   passwordFieldMasksSecret(): Cypress.Chainable<ValidationResult> {
@@ -24,7 +28,11 @@ export class UiElementsValidator extends BaseValidator<UiElementsLocators> {
 
   checkboxOutputShows(checked: boolean): Cypress.Chainable<ValidationResult> {
     const expected = checked ? 'Checked' : 'Unchecked';
-    return this.outputShows(this.locators.checkboxOutput(), `${OUTPUT_PREFIX}${expected}`, 'checkbox');
+    return this.outputShows(
+      this.locators.checkboxOutput(),
+      `${OUTPUT_PREFIX}${expected}`,
+      'checkbox',
+    );
   }
 
   radioOutputShows(option: RadioOption): Cypress.Chainable<ValidationResult> {
