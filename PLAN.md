@@ -106,9 +106,11 @@ Mirror of C# `Base/` + `Base/Actions/`. No page code yet; verify by typecheck/li
 
 1. [x] `ui-elements-locators.ts`: selectors for text field, password, checkbox, radio group + their output boxes (verified against live DOM 2026-10-08; no number input exists on the page)
 2. [x] `ui-elements-page.ts` extends `BasePage<UiElementsLocators>`; visit `/ui-elements` (verified at runtime 2026-10-08: all four ui-elements tests navigate to /ui-elements via goToSection)
-3. [ ] `ui-elements-actor.ts`: actors per control (e.g., `typeIntoTextField(text)`, `setNumberInput(value)`, …) built from actions
-4. [ ] `ui-elements-validator.ts`: validators asserting each output box reflects the input (`ValidationResult`)
-5. [ ] `ui-elements-coordinator.ts`: workflow = open page → actor action → validate output
+3. [x] `ui-elements-actor.ts`: actors per control (e.g., `typeIntoTextField(text)`, `setNumberInput(value)`, …) built from actions
+4. [x] `ui-elements-validator.ts`: validators asserting each output box reflects the input (`ValidationResult`)
+5. [x] `ui-elements-coordinator.ts`: workflow = open page → actor action → validate output
+
+Status: items 3–5 done; basic-elements spec written and verified against the live site (5 passing). Site notes updated with observed checkbox/radio behavior. Stopping for review before remaining TCs / Phase 3+.
 6. [ ] `cypress/e2e/ui-elements.cy.ts` — one test per TC, driving coordinators only:
    - [ ] TC-UIE-01 Text Field: type known string into `ui-text-field` → output shows `Output: <text>`
    - [ ] TC-UIE-02 Checkbox: toggle off then on → output tracks both states

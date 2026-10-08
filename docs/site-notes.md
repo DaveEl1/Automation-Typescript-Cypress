@@ -64,7 +64,7 @@ Observed Create account behavior (verified 2026-10-01): result box is `[data-tes
 
 ## UI Elements (`/ui-elements`)
 
-**Every control and its output box has a `data-testid`.** Layout: three groups under `h2` — Basic Elements, Selection Controls, Composite Widgets. Each block is a `section.ui-element-block` with an `h3` title, the control(s), and a live output box (`p.output-box`) that renders as `Output: <value>` (empty value → `Output: `; the Text Area block instead shows `<n> characters`).
+**Every control and its output box has a `data-testid`.** Layout: three groups under `h2` — Basic Elements, Selection Controls, Composite Widgets. Each block is a `section.ui-element-block` with an `h3` title, the control(s), and a live output box (`p.output-box`) that renders as `Output: <value>` (empty value → `Output: `; the Text Area block instead shows `<n> characters`; the Radio group block instead renders as `Selected: <label>`).
 
 ### Basic Elements
 
@@ -72,8 +72,8 @@ Observed Create account behavior (verified 2026-10-01): result box is `[data-tes
 | ---------------------- | -------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Text Field (Input Box) | `input#textField[data-testid=ui-text-field]`, placeholder "Type here"                                    | `[data-testid=ui-output-text-field]` — mirrors typed text live; verified: typing "Hello World 123" yields `Output: Hello World 123`                                                     |
 | Text Area              | `textarea[data-testid=ui-text-area]` rows 4, placeholder "Write a message..."                            | `[data-testid=ui-output-text-area]` — shows `<n> characters` (character count of the entered value), not an echo of the text; verified: typing "Hello World 123" yields `15 characters` |
-| Checkbox               | `input#checkboxToggle[data-testid=ui-checkbox-toggle]`, checked by default, label "Enable notifications" | `[data-testid=ui-output-checkbox-toggle]`                                                                                                                                               |
-| Radio Buttons          | group `name=ui-radio-group`: option-a / **option-b** (checked) / option-c, labels Option A/B/C           | `[data-testid=ui-output-radio-group]`                                                                                                                                                   |
+| Checkbox               | `input#ui-single-checkbox[data-testid=ui-single-checkbox]`, unchecked by default, label "Single Option" (verified 2026-10-08)                                                                                          | `[data-testid=ui-output-single-checkbox]` — shows `Output: Checked` / `Output: Unchecked`; verified 2026-10-08                                                                              |
+| Radio Buttons          | fieldset legend "Billing period" (`name=billing-period`): `ui-radio-monthly` (**Monthly**, checked by default) / `ui-radio-quarterly` (Quarterly) / `ui-radio-annual` (Annual); values and labels are Monthly, Quarterly, Annual (verified 2026-10-08)           | `[data-testid=ui-radio-group-output]` — shows `Selected: <label>`; verified 2026-10-08                                                                                                                                                   |
 
 ### Selection Controls
 
