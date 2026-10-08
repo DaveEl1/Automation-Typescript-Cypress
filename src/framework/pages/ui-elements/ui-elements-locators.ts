@@ -1,48 +1,43 @@
-import type { Element } from '../../base/i-page';
 import { BaseLocators } from '../../base/base-locators';
 
+export type RadioValue = 'monthly' | 'quarterly' | 'annual';
+
+const RADIO_TEST_IDS: Record<RadioValue, string> = {
+  monthly: 'ui-radio-monthly',
+  quarterly: 'ui-radio-quarterly',
+  annual: 'ui-radio-annual',
+};
+
 export class UiElementsLocators extends BaseLocators {
-  textFieldInput(): Element {
-    return this.page.getByTestId('text-field-input');
+  textFieldInput() {
+    return this.page.getByTestId('ui-text-field');
   }
 
-  textFieldOutput(): Element {
-    return this.page.getByTestId('text-field-output');
+  textFieldOutput() {
+    return this.page.getByTestId('ui-output-text-field');
   }
 
-  numberInput(): Element {
-    return this.page.getByTestId('number-input');
+  passwordField() {
+    return this.page.getByTestId('ui-password-input');
   }
 
-  numberInputOutput(): Element {
-    return this.page.getByTestId('number-input-output');
+  passwordToggleVisibility() {
+    return this.page.getByTestId('ui-password-toggle-visibility');
   }
 
-  passwordField(): Element {
-    return this.page.getByTestId('password-field');
+  checkbox() {
+    return this.page.getByTestId('ui-single-checkbox');
   }
 
-  passwordOutput(): Element {
-    return this.page.getByTestId('password-output');
+  checkboxOutput() {
+    return this.page.getByTestId('ui-output-single-checkbox');
   }
 
-  checkbox(): Element {
-    return this.page.getByTestId('checkbox');
+  radioOption(value: RadioValue) {
+    return this.page.getByTestId(RADIO_TEST_IDS[value]);
   }
 
-  checkboxOutput(): Element {
-    return this.page.getByTestId('checkbox-output');
-  }
-
-  radioGroup(): Element {
-    return this.page.getByTestId('radio-group');
-  }
-
-  radioOption(value: string): Element {
-    return this.radioGroup().find(`input[type="radio"][value="${value}"]`);
-  }
-
-  radioOutput(): Element {
-    return this.page.getByTestId('radio-output');
+  radioOutput() {
+    return this.page.getByTestId('ui-radio-group-output');
   }
 }

@@ -47,4 +47,4 @@ Dependencies are npm packages declared in `package.json`. `REQUIREMENTS.md` is t
 
 Target is the local SPA "Reach Catalog" at http://localhost:5173/; `docs/site-notes.md` documents all four sections (locators, fields, observed behavior) and `docs/test-plan.md` holds the phased test cases.
 
-Phase 0 complete (2026-10-07): scaffolding, config, docs ported, smoke spec green. Next step per `PLAN.md`: Phase 1 base classes in `src/framework/base/`.
+Phase 0 complete (2026-10-07); Phase 1 complete (2026-10-08): base classes, actions, home page stack, smoke spec green. Phase 2 in progress: `ui-elements-locators.ts` done and verified against the live DOM (no number input exists on the page). Next step per `PLAN.md`: UI Elements actor/validator/coordinator/spec for basic elements.

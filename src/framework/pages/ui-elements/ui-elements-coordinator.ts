@@ -24,16 +24,10 @@ export class UiElementsCoordinator extends BaseCoordinator<UiElementsPage> {
     this.expectValid(this.validator.textFieldOutputMatches(text));
   }
 
-  verifyNumberInputShowsEnteredValue(value: number): void {
-    this.open();
-    this.actor.setNumberInput(value);
-    this.expectValid(this.validator.numberInputOutputShows(value));
-  }
-
   verifyPasswordFieldMasksSecret(secret: string): void {
     this.open();
     this.actor.enterPassword(secret);
-    this.expectValid(this.validator.passwordOutputIsMasked());
+    this.expectValid(this.validator.passwordFieldMasksSecret());
   }
 
   verifyCheckboxOutputTracksState(): void {

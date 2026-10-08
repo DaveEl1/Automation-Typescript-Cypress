@@ -4,21 +4,18 @@ import { setChecked } from '../../base/actions/toggle';
 import { typeText } from '../../base/actions/type-text';
 import type { UiElementsLocators } from './ui-elements-locators';
 
-export const RADIO_OPTIONS = ['option-a', 'option-b'] as const;
+export const RADIO_OPTIONS = ['monthly', 'quarterly', 'annual'] as const;
 export type RadioOption = (typeof RADIO_OPTIONS)[number];
 
 export const RADIO_LABELS: Record<RadioOption, string> = {
-  'option-a': 'Option A',
-  'option-b': 'Option B',
+  monthly: 'Monthly',
+  quarterly: 'Quarterly',
+  annual: 'Annual',
 };
 
 export class UiElementsActor extends BaseActor<UiElementsLocators> {
   typeIntoTextField(text: string): void {
     typeText(this.locators.textFieldInput(), text);
-  }
-
-  setNumberInput(value: number): void {
-    typeText(this.locators.numberInput(), String(value));
   }
 
   enterPassword(secret: string): void {

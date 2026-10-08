@@ -13,10 +13,6 @@ describe('UI Elements — basic elements', () => {
     coordinator.verifyTextFieldEchoesTypedText('Hello, Cypress!');
   });
 
-  it('Should show entered value in output box When setting the number input', () => {
-    coordinator.verifyNumberInputShowsEnteredValue(42);
-  });
-
   it('Should mask secret as bullets When entering a password', () => {
     coordinator.verifyPasswordFieldMasksSecret('s3cret!');
   });
@@ -26,6 +22,6 @@ describe('UI Elements — basic elements', () => {
   });
 
   it('Should show selected option label in output box When selecting a radio option', () => {
-    coordinator.verifyRadioGroupUpdatesOutput('option-a');
+    coordinator.verifyRadioGroupUpdatesOutput('quarterly');
   });
 });

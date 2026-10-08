@@ -10,17 +10,14 @@ export class UiElementsValidator extends BaseValidator<UiElementsLocators> {
     return this.outputShows(this.locators.textFieldOutput(), expected, 'text field');
   }
 
-  numberInputOutputShows(value: number): Cypress.Chainable<ValidationResult> {
-    return this.outputShows(this.locators.numberInputOutput(), String(value), 'number input');
-  }
-
-  passwordOutputIsMasked(): Cypress.Chainable<ValidationResult> {
-    return readText(this.locators.passwordOutput()).then((text) => {
-      const masked = text.length > 0 && /^•+$/.test(text);
-      return masked
-        ? ValidationResult.ok('Password output is fully masked')
-        : ValidationResult.fail(`Expected a masked password, but the output shows "${text}"`);
-    });
+  passwordFieldMasksSecret(): Cypress.Chainable<ValidationResult> {
+    return this.locators.passwordField()
+      .invoke('attr', 'type')
+      .then((type) =>
+        type === 'password'
+          ? ValidationResult.ok('Password field masks its value (input type="password")')
+          : ValidationResult.fail(`Expected input type "password", but found "${type}"`),
+      );
   }
 
   checkboxOutputShows(checked: boolean): Cypress.Chainable<ValidationResult> {

@@ -104,7 +104,7 @@ Mirror of C# `Base/` + `Base/Actions/`. No page code yet; verify by typecheck/li
 
 ## Phase 2 — UI Elements: Basic Elements (`pages/ui-elements/`)
 
-1. [ ] `ui-elements-locators.ts`: selectors for text field, number input, password, checkbox, radio group + their output boxes
+1. [x] `ui-elements-locators.ts`: selectors for text field, password, checkbox, radio group + their output boxes (verified against live DOM 2026-10-08; no number input exists on the page)
 2. [ ] `ui-elements-page.ts` extends `BasePage<UiElementsLocators>`; visit `/ui-elements`
 3. [ ] `ui-elements-actor.ts`: actors per control (e.g., `typeIntoTextField(text)`, `setNumberInput(value)`, …) built from actions
 4. [ ] `ui-elements-validator.ts`: validators asserting each output box reflects the input (`ValidationResult`)
