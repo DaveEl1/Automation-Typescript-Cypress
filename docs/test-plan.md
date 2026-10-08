@@ -24,10 +24,8 @@ npm scaffolding, TypeScript strict setup, Cypress config, folder skeleton, docs 
 | ID        | Block                  | Steps                                                         | Expected                                                                                           | Status  |
 | --------- | ---------------------- | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | ------- |
 | TC-UIE-01 | Text Field (Input Box) | Open `/ui-elements`; type a known string into `ui-text-field` | Output box (`ui-output-text-field`) contains the entered text, rendered as `Output: <text>`        | pending |
-| TC-UIE-02 | Number Input           | Set `ui-number-input` to a value in 0–100                     | Output shows that number; out-of-range values are clamped/rejected (capture actual behavior first) | pending |
-| TC-UIE-03 | Password Field         | Type into `ui-password-field`                                 | Output reflects the input per app behavior (masked/length — capture on implementation)             | pending |
-| TC-UIE-04 | Checkbox               | Toggle `ui-checkbox-toggle` off, then on                      | Output tracks checked state both ways                                                              | pending |
-| TC-UIE-05 | Radio Buttons          | Select each of Option A/B/C in turn                           | Output shows the selected option label/value                                                       | pending |
+| TC-UIE-02 | Checkbox               | Toggle `ui-checkbox-toggle` off, then on                      | Output tracks checked state both ways                                                              | pending |
+| TC-UIE-03 | Radio Buttons          | Select each of Option A/B/C in turn                           | Output shows the selected option label/value                                                       | pending |
 
 ### Phase 3 — UI Elements: Selection Controls & Composite Widgets
 

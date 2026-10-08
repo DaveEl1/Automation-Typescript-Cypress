@@ -1,6 +1,8 @@
 import type { IPage } from './i-page';
 
-export function createPage(page: IPage): IPage {
+export type PageCore = Omit<IPage, 'getByRole' | 'getByLabelText' | 'getByTestId'>;
+
+export function createPage(page: PageCore): IPage {
   return {
     ...page,
     getByRole(role: string, name: string) {

@@ -1,4 +1,4 @@
-import type { Element, IPage } from './i-page';
+import type { AutWindow, IPage } from './i-page';
 import { BaseLocators } from './base-locators';
 import { click } from './actions/click';
 
@@ -11,7 +11,7 @@ export abstract class BasePage<TLocators extends BaseLocators> {
     this.locators = locators;
   }
 
-  visit(path: string): Element {
+  visit(path: string): AutWindow {
     return this.page.visit(path);
   }
 
