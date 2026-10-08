@@ -1,6 +1,6 @@
 import { BaseCoordinator } from '../../base/base-coordinator';
 import type { ValidationResult } from '../../base/validation-result';
-import { UiElementsActor, type RadioOption } from './ui-elements-actor';
+import { RADIO_OPTIONS, UiElementsActor, type RadioOption } from './ui-elements-actor';
 import type { UiElementsPage } from './ui-elements-page';
 import { UiElementsValidator } from './ui-elements-validator';
 
@@ -32,16 +32,18 @@ export class UiElementsCoordinator extends BaseCoordinator<UiElementsPage> {
 
   verifyCheckboxOutputTracksState(): void {
     this.open();
-    this.actor.toggleCheckbox(true);
-    this.expectValid(this.validator.checkboxOutputShows(true));
     this.actor.toggleCheckbox(false);
     this.expectValid(this.validator.checkboxOutputShows(false));
+    this.actor.toggleCheckbox(true);
+    this.expectValid(this.validator.checkboxOutputShows(true));
   }
 
-  verifyRadioGroupUpdatesOutput(option: RadioOption): void {
+  verifyRadioGroupTracksEachSelection(options: readonly RadioOption[] = RADIO_OPTIONS): void {
     this.open();
-    this.actor.selectRadioOption(option);
-    this.expectValid(this.validator.radioOutputShows(option));
+    for (const option of options) {
+      this.actor.selectRadioOption(option);
+      this.expectValid(this.validator.radioOutputShows(option));
+    }
   }
 
   private expectValid(result: Cypress.Chainable<ValidationResult>): void {

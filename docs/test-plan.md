@@ -23,9 +23,9 @@ npm scaffolding, TypeScript strict setup, Cypress config, folder skeleton, docs 
 
 | ID        | Block                  | Steps                                                         | Expected                                                                                           | Status  |
 | --------- | ---------------------- | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | ------- |
-| TC-UIE-01 | Text Field (Input Box) | Open `/ui-elements`; type a known string into `ui-text-field` | Output box (`ui-output-text-field`) contains the entered text, rendered as `Output: <text>`        | pending |
-| TC-UIE-02 | Checkbox               | Toggle `ui-checkbox-toggle` off, then on                      | Output tracks checked state both ways                                                              | pending |
-| TC-UIE-03 | Radio Buttons          | Select each of Option A/B/C in turn                           | Output shows the selected option label/value                                                       | pending |
+| TC-UIE-01 | Text Field (Input Box) | Open `/ui-elements`; type a known string into `ui-text-field` | Output box (`ui-output-text-field`) contains the entered text, rendered as `Output: <text>`        | done 2026-10-08 |
+| TC-UIE-02 | Checkbox               | Toggle checkbox off, then on                                  | Output tracks checked state both ways                                                              | done 2026-10-08 |
+| TC-UIE-03 | Radio Buttons          | Select each option in turn                                    | Output shows the selected option label/value                                                       | done 2026-10-08 |
 
 ### Phase 3 — UI Elements: Selection Controls & Composite Widgets
 

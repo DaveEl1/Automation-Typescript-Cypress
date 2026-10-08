@@ -17,11 +17,11 @@ describe('UI Elements — basic elements', () => {
     coordinator.verifyPasswordFieldMasksSecret('s3cret!');
   });
 
-  it('Should update output to Checked and Unchecked When toggling the checkbox', () => {
+  it('Should track both states in output When toggling the checkbox off then on', () => {
     coordinator.verifyCheckboxOutputTracksState();
   });
 
-  it('Should show selected option label in output box When selecting a radio option', () => {
-    coordinator.verifyRadioGroupUpdatesOutput('quarterly');
+  it('Should show each selected option label in output When selecting radio options A through C in turn', () => {
+    coordinator.verifyRadioGroupTracksEachSelection();
   });
 });

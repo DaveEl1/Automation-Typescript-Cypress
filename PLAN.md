@@ -110,11 +110,12 @@ Mirror of C# `Base/` + `Base/Actions/`. No page code yet; verify by typecheck/li
 4. [x] `ui-elements-validator.ts`: validators asserting each output box reflects the input (`ValidationResult`)
 5. [x] `ui-elements-coordinator.ts`: workflow = open page → actor action → validate output
 
-Status: items 3–5 done; basic-elements spec written and verified against the live site (5 passing). Site notes updated with observed checkbox/radio behavior. Stopping for review before remaining TCs / Phase 3+.
-6. [ ] `cypress/e2e/ui-elements.cy.ts` — one test per TC, driving coordinators only:
-    - [x] TC-UIE-01 Text Field: type known string into `ui-text-field` → output shows `Output: <text>` (verified 2026-10-08)
-   - [ ] TC-UIE-02 Checkbox: toggle off then on → output tracks both states
-   - [ ] TC-UIE-03 Radio Buttons: select A/B/C in turn → output shows selected option
+6. [x] `cypress/e2e/ui-elements.cy.ts` — one test per TC, driving coordinators only:
+   - [x] TC-UIE-01 Text Field: type known string into `ui-text-field` → output shows `Output: <text>` (verified 2026-10-08)
+   - [x] TC-UIE-02 Checkbox: toggle off then on → output tracks both states (verified 2026-10-08; checkbox is unchecked by default, so the "off" step asserts initial state via idempotent `uncheck`)
+   - [x] TC-UIE-03 Radio Buttons: select A/B/C in turn → output shows selected option (verified 2026-10-08; options are Monthly/Quarterly/Annual, selected in that order on one page visit)
+
+Status: items 1–6 done; `ui-elements.cy.ts` verified against the live site (4 passing). Site notes updated with observed checkbox/radio behavior. Stopping for review before Phase 3+.
 
 **Verify:** `npx cypress run --spec cypress/e2e/ui-elements.cy.ts` green; any behavior differing from assumption recorded back in `docs/site-notes.md`.
 
@@ -179,4 +180,5 @@ Validation-focused; all forms are `novalidate`, so expected messages must be cap
 
 - Phase 0: complete (2026-10-07) — scaffolding, config, docs ported, smoke spec green
 - Phase 1: complete (2026-10-07) — base classes (`i-page`, `page-factory`, `base-*`) and raw actions in `src/framework/base/`
-- Phases 2–6: pending
+- Phase 2: complete (2026-10-08) — UI Elements basic-elements stack + `ui-elements.cy.ts` green (TC-UIE-01/02/03); stopping for review before Phase 3
+- Phases 3–6: pending
