@@ -60,4 +60,20 @@ describe('UI Elements', () => {
   it('Should update each output independently When dropdown, slider and switch are changed together', () => {
     coordinator.verifySelectionControlsUpdateIndependently('India', 40, true);
   });
+
+  it('Should show the typed character count in output When a message is entered into the text area', () => {
+    coordinator.verifyTextAreaCountsTypedCharacters('Hello from the text area');
+  });
+
+  it('Should reset the character count to 0 When the text area is cleared', () => {
+    coordinator.verifyTextAreaResetsCountWhenCleared();
+  });
+
+  it('Should list the attached file When a .txt fixture is uploaded', () => {
+    coordinator.verifyUploadedFileAppearsInList();
+  });
+
+  it('Should remove the file listing When the clear button is clicked', () => {
+    coordinator.verifyUploadedFileListClears();
+  });
 });

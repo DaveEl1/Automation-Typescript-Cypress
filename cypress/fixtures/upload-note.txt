@@ -1,0 +1,2 @@
+Reach Catalog upload fixture
+This file is attached by ui-elements.cy.ts to exercise the File upload block.

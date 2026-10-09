@@ -3,12 +3,17 @@ import type { ValidationResult } from '../../base/validation-result';
 import {
   COUNTRY_OPTIONS,
   RADIO_OPTIONS,
+  UPLOAD_FIXTURE_PATH,
   UiElementsActor,
   type CountryOption,
   type RadioOption,
 } from './ui-elements-actor';
 import type { UiElementsPage } from './ui-elements-page';
 import { UiElementsValidator } from './ui-elements-validator';
+
+function fileNameOf(filePath: string): string {
+  return filePath.split(/[\\/]/).pop() ?? filePath;
+}
 
 export class UiElementsCoordinator extends BaseCoordinator<UiElementsPage> {
   private readonly actor: UiElementsActor;
@@ -124,6 +129,35 @@ export class UiElementsCoordinator extends BaseCoordinator<UiElementsPage> {
     this.expectValid(this.validator.dropdownOutputShows(country));
     this.expectValid(this.validator.sliderOutputShows(sliderValue));
     this.expectValid(this.validator.switchOutputShows(switchOn));
+  }
+
+  verifyTextAreaCountsTypedCharacters(text: string): void {
+    this.open();
+    this.actor.typeIntoTextArea(text);
+    this.expectValid(this.validator.textAreaOutputShowsCharacterCount(text.length));
+  }
+
+  verifyTextAreaResetsCountWhenCleared(text = 'Sample message'): void {
+    this.open();
+    this.actor.typeIntoTextArea(text);
+    this.expectValid(this.validator.textAreaOutputShowsCharacterCount(text.length));
+    this.actor.clearTextArea();
+    this.expectValid(this.validator.textAreaOutputShowsCharacterCount(0));
+  }
+
+  verifyUploadedFileAppearsInList(filePath = UPLOAD_FIXTURE_PATH): void {
+    this.open();
+    this.actor.attachFileToUpload(filePath);
+    this.expectValid(this.validator.fileListShows(fileNameOf(filePath)));
+    this.expectValid(this.validator.clearButtonShowsLabel());
+  }
+
+  verifyUploadedFileListClears(filePath = UPLOAD_FIXTURE_PATH): void {
+    this.open();
+    this.actor.attachFileToUpload(filePath);
+    this.expectValid(this.validator.fileListShows(fileNameOf(filePath)));
+    this.actor.clearUploadedFiles();
+    this.expectValid(this.validator.fileListCleared());
   }
 
   private expectValid(result: Cypress.Chainable<ValidationResult>): void {

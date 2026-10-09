@@ -31,6 +31,18 @@ npm scaffolding, TypeScript strict setup, Cypress config, folder skeleton, docs 
 
 Dropdown select, slider, toggle switch, date picker (Selection Controls); color picker, file upload, textarea, range input, time picker (Composite Widgets). One test case per block, same pattern as Phase 2: set the control → assert its output box. File upload needs a fixture file (`.txt`).
 
+| ID        | Block           | Steps                                                                   | Expected                                                                         | Status               |
+| --------- | --------------- | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------- |
+| TC-UIE-04 | Dropdown select | Choose each country in turn, then reset to the placeholder              | `Output: <country>` each time; `Output: No option selected` after reset          | done 2026-10-09      |
+| TC-UIE-05 | Slider          | Set a mid-range value; then set min and max                             | `Value: <n>` reflects each value                                                 | done 2026-10-09      |
+| TC-UIE-06 | Toggle switch   | Turn on then off; toggle rapidly three times                            | `Output: On` / `Output: Off` tracks the switch state                             | done 2026-10-09      |
+| TC-UIE-07 | Date picker     | Pick a date, then clear the input                                       | `Selected date: <yyyy-mm-dd>`; `No date selected` after clearing                 | done 2026-10-09      |
+| TC-UIE-08 | Text area       | Type a known string, then clear the field                               | `<n> characters` matches the typed length; `0 characters` after clearing         | done 2026-10-09      |
+| TC-UIE-09 | File upload     | Attach `cypress/fixtures/upload-note.txt`, then click "Clear files"     | List shows `<name> (<size> KB)` + clear button appears; list gone after clearing | done 2026-10-09      |
+| —         | Color picker    | Control does not exist on the page (no `input[type=color]`)             | —                                                                                | n/a                  |
+| —         | Range input     | Same control as the Slider (`input[type=range]`) — covered by TC-UIE-05 | —                                                                                | covered by TC-UIE-05 |
+| —         | Time picker     | Control does not exist on the page (no `input[type=time]`)              | —                                                                                | n/a                  |
+
 ### Phase 4 — Forms
 
 Validation-focused; all forms are `novalidate`, so expected messages come from app code and must be captured empirically first.

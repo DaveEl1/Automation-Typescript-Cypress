@@ -1,4 +1,6 @@
 import { BaseActor } from '../../base/base-actor';
+import { attachFile } from '../../base/actions/attach-file';
+import { clearField } from '../../base/actions/clear-field';
 import { click } from '../../base/actions/click';
 import { selectOption } from '../../base/actions/select';
 import { setValue } from '../../base/actions/set-value';
@@ -17,6 +19,8 @@ export const RADIO_LABELS: Record<RadioOption, string> = {
 
 export const COUNTRY_OPTIONS = ['US', 'Canada', 'UK', 'India', 'Australia'] as const;
 export type CountryOption = (typeof COUNTRY_OPTIONS)[number];
+
+export const UPLOAD_FIXTURE_PATH = 'cypress/fixtures/upload-note.txt';
 
 export class UiElementsActor extends BaseActor<UiElementsLocators> {
   typeIntoTextField(text: string): void {
@@ -57,5 +61,21 @@ export class UiElementsActor extends BaseActor<UiElementsLocators> {
 
   clearDate(): void {
     setValue(this.locators.dateInput(), '');
+  }
+
+  typeIntoTextArea(text: string): void {
+    typeText(this.locators.textArea(), text);
+  }
+
+  clearTextArea(): void {
+    clearField(this.locators.textArea());
+  }
+
+  attachFileToUpload(filePath: string): void {
+    attachFile(this.locators.fileUploadInput(), filePath);
+  }
+
+  clearUploadedFiles(): void {
+    click(this.locators.fileUploadClearButton());
   }
 }

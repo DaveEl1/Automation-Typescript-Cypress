@@ -72,4 +72,28 @@ export class UiElementsLocators extends BaseLocators {
   dateOutput() {
     return this.page.getByTestId('ui-date-output');
   }
+
+  textArea() {
+    return this.page.getByTestId('ui-text-area');
+  }
+
+  textAreaOutput() {
+    return this.page.getByTestId('ui-text-area-output');
+  }
+
+  fileUploadInput() {
+    return this.page.getByTestId('ui-file-upload');
+  }
+
+  fileUploadItem(index: number) {
+    return this.page.getByTestId(`ui-file-upload-item-${index}`);
+  }
+
+  fileUploadClearButton() {
+    return this.page.getByTestId('ui-file-upload-clear-button');
+  }
+
+  fileUploadListSelector() {
+    return '[data-testid="ui-file-upload-list"]';
+  }
 }

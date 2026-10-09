@@ -1,5 +1,6 @@
 import type { Element } from '../../base/i-page';
 import { BaseValidator } from '../../base/base-validator';
+import { elementExists } from '../../base/actions/element-exists';
 import { getAttribute } from '../../base/actions/get-attribute';
 import { readText } from '../../base/actions/read-text';
 import { ValidationResult } from '../../base/validation-result';
@@ -8,6 +9,7 @@ import type { UiElementsLocators } from './ui-elements-locators';
 
 const OUTPUT_PREFIX = 'Output: ';
 const RADIO_OUTPUT_PREFIX = 'Selected: ';
+const FILE_CLEAR_BUTTON_LABEL = 'Clear files';
 
 export class UiElementsValidator extends BaseValidator<UiElementsLocators> {
   textFieldOutputMatches(expected: string): Cypress.Chainable<ValidationResult> {
@@ -78,6 +80,36 @@ export class UiElementsValidator extends BaseValidator<UiElementsLocators> {
 
   dateOutputShowsNone(): Cypress.Chainable<ValidationResult> {
     return this.outputShows(this.locators.dateOutput(), 'No date selected', 'date input');
+  }
+
+  textAreaOutputShowsCharacterCount(count: number): Cypress.Chainable<ValidationResult> {
+    return this.outputShows(this.locators.textAreaOutput(), `${count} characters`, 'text area');
+  }
+
+  fileListShows(fileName: string): Cypress.Chainable<ValidationResult> {
+    return readText(this.locators.fileUploadItem(0)).then((text) =>
+      text.includes(fileName)
+        ? ValidationResult.ok(`file list shows "${fileName}"`)
+        : ValidationResult.fail(`file list shows "${text}", expected it to include "${fileName}"`),
+    );
+  }
+
+  fileListCleared(): Cypress.Chainable<ValidationResult> {
+    return elementExists(this.locators.fileUploadListSelector()).then((exists) =>
+      exists
+        ? ValidationResult.fail('file upload list is still shown after clearing')
+        : ValidationResult.ok('file upload list is gone after clearing'),
+    );
+  }
+
+  clearButtonShowsLabel(): Cypress.Chainable<ValidationResult> {
+    return readText(this.locators.fileUploadClearButton()).then((text) =>
+      text === FILE_CLEAR_BUTTON_LABEL
+        ? ValidationResult.ok(`clear button label is "${FILE_CLEAR_BUTTON_LABEL}"`)
+        : ValidationResult.fail(
+            `clear button label is "${text}", expected "${FILE_CLEAR_BUTTON_LABEL}"`,
+          ),
+    );
   }
 
   private outputShows(
