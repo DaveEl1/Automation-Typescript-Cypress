@@ -1,18 +1,20 @@
 # Site Notes — Reach Catalog (http://localhost:5173/)
 
-Local SPA with four client-side sections, reachable via the top nav bar. All routes are path-based (`/`, `/products`, `/forms`, `/ui-elements`). Verified by probing the live site on 2026-09-19.
+Local SPA with four client-side sections, reachable via the top nav bar. Verified by probing the live site on 2026-09-19; selection controls re-verified against the live DOM on 2026-10-09.
+
+**No client-side router**: the active section is React state, not the URL — nav clicks don't change the path, and `cy.visit('/ui-elements')` renders Home. Reach a section by visiting `/` and then clicking its nav `data-testid` (what `BasePage.goToSection()` does).
 
 ## Shared chrome (all pages)
 
 Nav buttons — each has a `data-testid`:
 
-| Button                            | `data-testid`        | Navigates to   |
-| --------------------------------- | -------------------- | -------------- |
-| `Reach Catalog` (brand, leftmost) | `site-brand`         | `/` (Home)     |
-| `Home`                            | `nav-home`           | `/`            |
-| `Products`                        | `nav-products`       | `/products`    |
-| `Forms`                           | `nav-forms`          | `/forms`       |
-| `UI Elements`                     | `nav-ui-elements`    | `/ui-elements` |
+| Button                            | `data-testid`     | Navigates to   |
+| --------------------------------- | ----------------- | -------------- |
+| `Reach Catalog` (brand, leftmost) | `site-brand`      | `/` (Home)     |
+| `Home`                            | `nav-home`        | `/`            |
+| `Products`                        | `nav-products`    | `/products`    |
+| `Forms`                           | `nav-forms`       | `/forms`       |
+| `UI Elements`                     | `nav-ui-elements` | `/ui-elements` |
 
 ## Home (`/`)
 
@@ -50,18 +52,18 @@ Nav buttons — each has a `data-testid`:
 
 **Every form and most fields have `data-testid`s.** All forms are `novalidate`** — validation messages come from app code, not native browser bubbles. Sections grouped under `h2`: Authentication / Data Entry / Transactions / Feedback & Preferences. Each form is a `section.ui-element-block` with an `h3` title and a submit button (verified 2026-10-01; earlier notes said `form-section`).
 
-| Form (h3)        | Form testid          | Fields (testids)                                                                                                                                                                                                                                | Submit testid          |
-| ---------------- | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
-| Sign in          | —                    | `ui-text-field` (email), `ui-text-field` (password), `ui-checkbox` (remember me). Hint: any email + password ≥ 8 chars works.                                                                                                                   | `ui-button`            |
-| Create account   | `registration-form`  | `reg-name`, `reg-email`, `reg-password`, `reg-confirm` — all required.                                                                                                                                                                          | `create-account-button` |
-| Contact us       | —                    | `ui-text-field` (name), `ui-text-field` (email), `ui-select` (subject: General/Billing/Support/Feedback), `ui-textarea` (message).                                                                                                               | `ui-button`            |
-| Public profile   | `profile-form`       | `profile-first-name`, `profile-last-name`, `profile-bio` (optional textarea).                                                                                                                                                                    | `update-profile-button` |
-| Choose a plan    | `subscription-form`  | Radio group `subscription-plan-group` (basic / **pro** checked / enterprise), radio group `subscription-cycle-group` (**monthly** checked / yearly), `subscription-email`.                                                                       | `subscribe-button`     |
-| Card payment     | —                    | `ui-text-field` (cardholder), `ui-text-field` (card number), `ui-text-field` (expiry MM/YY), `ui-text-field` (CVC). Hint: try 4242 4242 4242 4242.                                                                                                | `ui-button`            |
-| Shipping details | —                    | `ui-text-field` (name), `ui-text-field` (address), `ui-text-field` (city), `ui-text-field` (postal).                                                                                                                                            | `ui-button`            |
-| Quick survey     | `survey-form`        | Radio group `survey-rating-group` (1–5), radio group `survey-recommend-group` (yes/no), `survey-comments` (optional).                                                                                                                            | `submit-survey-button` |
-| Account settings | `settings-form`      | `settings-username`, `settings-theme` (select: Light/Dark/**System**), checkboxes `settings-notif-email` (checked), `settings-notif-sms`, `settings-notif-push` (checked).                                                                       | `save-settings-button` |
-| Search & filter  | —                    | `search-query`, `search-category` (select: All/Electronics/Accessories/Apparel/Home), `search-min-price`, `search-max-price`, `search-in-stock` (checkbox).                                                                                       | `apply-filters-button` |
+| Form (h3)        | Form testid         | Fields (testids)                                                                                                                                                           | Submit testid           |
+| ---------------- | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| Sign in          | —                   | `ui-text-field` (email), `ui-text-field` (password), `ui-checkbox` (remember me). Hint: any email + password ≥ 8 chars works.                                              | `ui-button`             |
+| Create account   | `registration-form` | `reg-name`, `reg-email`, `reg-password`, `reg-confirm` — all required.                                                                                                     | `create-account-button` |
+| Contact us       | —                   | `ui-text-field` (name), `ui-text-field` (email), `ui-select` (subject: General/Billing/Support/Feedback), `ui-textarea` (message).                                         | `ui-button`             |
+| Public profile   | `profile-form`      | `profile-first-name`, `profile-last-name`, `profile-bio` (optional textarea).                                                                                              | `update-profile-button` |
+| Choose a plan    | `subscription-form` | Radio group `subscription-plan-group` (basic / **pro** checked / enterprise), radio group `subscription-cycle-group` (**monthly** checked / yearly), `subscription-email`. | `subscribe-button`      |
+| Card payment     | —                   | `ui-text-field` (cardholder), `ui-text-field` (card number), `ui-text-field` (expiry MM/YY), `ui-text-field` (CVC). Hint: try 4242 4242 4242 4242.                         | `ui-button`             |
+| Shipping details | —                   | `ui-text-field` (name), `ui-text-field` (address), `ui-text-field` (city), `ui-text-field` (postal).                                                                       | `ui-button`             |
+| Quick survey     | `survey-form`       | Radio group `survey-rating-group` (1–5), radio group `survey-recommend-group` (yes/no), `survey-comments` (optional).                                                      | `submit-survey-button`  |
+| Account settings | `settings-form`     | `settings-username`, `settings-theme` (select: Light/Dark/**System**), checkboxes `settings-notif-email` (checked), `settings-notif-sms`, `settings-notif-push` (checked). | `save-settings-button`  |
+| Search & filter  | —                   | `search-query`, `search-category` (select: All/Electronics/Accessories/Apparel/Home), `search-min-price`, `search-max-price`, `search-in-stock` (checkbox).                | `apply-filters-button`  |
 
 Result boxes: `registration-result`, `subscription-result`, `survey-result`, `settings-result`, `profile-result`, `search-result` — rendered as `.output-box.success` or `.output-box.error` with `role=status`.
 
@@ -73,40 +75,40 @@ Observed Create account behavior (verified 2026-10-01): result box is `[data-tes
 
 ### Basic Elements
 
-| Block (h3)             | Control                                                                                                                                                                                                                                                | Output box                                                                                                                                                                              |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Text Field (Input Box) | `input#textField[data-testid=ui-text-field]`, placeholder "Type here"                                                                                                                                                                                  | `[data-testid=ui-text-field-output]` — mirrors typed text live                                                                                                                          |
-| Text Area              | `textarea[data-testid=ui-text-area]` rows 4, placeholder "Write a message..."                                                                                                                                                                          | `[data-testid=ui-text-area-output]` — shows `<n> characters`                                                                                                                            |
-| Click Counter          | `button[data-testid=ui-click-counter-button]`                                                                                                                                                                                                         | `[data-testid=ui-click-counter-output]`                                                                                                                                                 |
-| Checkbox               | `input#ui-single-checkbox[data-testid=ui-single-checkbox]`, unchecked by default, label "Single Option"                                                                                                                                                | `[data-testid=ui-single-checkbox-output]` — shows `Output: Checked` / `Output: Unchecked`                                                                                                |
-| Multi Checkboxes       | checkboxes for Option A / Option B / Option C                                                                                                                                                                                                         | `[data-testid=ui-multi-checkboxes-output]`                                                                                                                                              |
-| Radio Buttons          | fieldset legend "Billing period" (`name=billing-period`): `ui-radio-monthly` (**Monthly**, checked by default) / `ui-radio-quarterly` (Quarterly) / `ui-radio-annual` (Annual); values and labels are Monthly, Quarterly, Annual                     | `[data-testid=ui-radio-group-output]` — shows `Selected: <label>`                                                                                                                       |
-| Single Select Dropdown | `select[data-testid=ui-single-dropdown]`: **Fruit** / Vegetable / Dairy / Meat                                                                                                                                                                         | (output rendered by ElementBlock)                                                                                                                                                       |
-| Multi Select Dropdown  | `select[data-testid=ui-multi-select-dropdown]` with checkboxes                                                                                                                                                                                         | `[data-testid=ui-multi-select-dropdown-output]`                                                                                                                                         |
+| Block (h3)             | Control                                                                                                                                                                                                                          | Output box                                                                                                  |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Text Field (Input Box) | `input#textField[data-testid=ui-text-field]`, placeholder "Type here"                                                                                                                                                            | `[data-testid=ui-text-field-output]` — mirrors typed text live                                              |
+| Text Area              | `textarea[data-testid=ui-text-area]` rows 4, placeholder "Write a message..."                                                                                                                                                    | `[data-testid=ui-text-area-output]` — shows `<n> characters`                                                |
+| Click Counter          | `button[data-testid=ui-click-counter-button]`                                                                                                                                                                                    | `[data-testid=ui-click-counter-output]`                                                                     |
+| Checkbox               | `input#ui-single-checkbox[data-testid=ui-single-checkbox]`, unchecked by default, label "Single Option"                                                                                                                          | `[data-testid=ui-single-checkbox-output]` — shows `Output: Checked` / `Output: Unchecked`                   |
+| Multi Checkboxes       | checkboxes for Option A / Option B / Option C                                                                                                                                                                                    | `[data-testid=ui-multi-checkboxes-output]`                                                                  |
+| Radio Buttons          | fieldset legend "Billing period" (`name=billing-period`): `ui-radio-monthly` (**Monthly**, checked by default) / `ui-radio-quarterly` (Quarterly) / `ui-radio-annual` (Annual); values and labels are Monthly, Quarterly, Annual | `[data-testid=ui-radio-group-output]` — shows `Selected: <label>`                                           |
+| Single Select Dropdown | `select#singleDropdown[data-testid=ui-single-dropdown]`, placeholder "Select a country": **US** / Canada / UK / India / Australia                                                                                                | `[data-testid=ui-output-single-dropdown]` — shows `Output: <country>`, default `Output: No option selected` |
+| Multi Select Dropdown  | `select[data-testid=ui-multi-select-dropdown]` with checkboxes                                                                                                                                                                   | `[data-testid=ui-multi-select-dropdown-output]`                                                             |
 
 ### Interactive Elements
 
-| Block (h3)     | Control                                                                              | Output box                          |
-| -------------- | ------------------------------------------------------------------------------------ | ----------------------------------- |
-| Toggle Switch  | `input#toggleSwitch[data-testid=ui-toggle-switch]` type checkbox, checked, `role=switch`, label "Dark mode" | `[data-testid=ui-toggle-switch-output]` |
-| Slider         | `input#sliderRange[data-testid=ui-slider]` range 0–100, default 50                   | `[data-testid=ui-slider-output]`    |
-| Date Picker    | `input#datePicker[data-testid=ui-date-input]` type date, default 2024-01-15          | `[data-testid=ui-date-output]`      |
-| File Upload    | `input#fileUpload[data-testid=ui-file-upload]` type file, accept `.txt,.csv,.json`, button "Choose file" | `[data-testid=ui-file-upload-list]` + `[data-testid=ui-file-upload-clear-button]` |
-| Modal Dialog   | `button[data-testid=ui-modal-open-button]`, dialog `[data-testid=ui-modal-dialog]`, overlay `[data-testid=ui-modal-overlay]`, close `button[data-testid=ui-modal-close-button]` | — |
-| Accordion      | accordion headers/sections                                                           | — |
-| Tabs           | tab buttons                                                                          | `[data-testid=ui-tabs-output]`      |
+| Block (h3)    | Control                                                                                                                                                                                                                                   | Output box                                                                          |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Toggle Switch | `input#ui-toggle-switch[data-testid=ui-toggle-switch]` type checkbox, **unchecked by default**, inside `label.switch`; the native input is CSS-hidden (`opacity: 0; width: 0; height: 0`), so Cypress interaction needs `{ force: true }` | `[data-testid=ui-output-toggle-switch]` — `Output: On` / `Output: Off`              |
+| Slider        | `input[data-testid=ui-slider]` (no id) range 0–100, default 50                                                                                                                                                                            | `[data-testid=ui-slider-output]` — `Value: <n>`                                     |
+| Date Picker   | `input[data-testid=ui-date-input]` type date, **empty by default**                                                                                                                                                                        | `[data-testid=ui-date-output]` — `Selected date: <yyyy-mm-dd>` / `No date selected` |
+| File Upload   | `input#fileUpload[data-testid=ui-file-upload]` type file, accept `.txt,.csv,.json`, button "Choose file"                                                                                                                                  | `[data-testid=ui-file-upload-list]` + `[data-testid=ui-file-upload-clear-button]`   |
+| Modal Dialog  | `button[data-testid=ui-modal-open-button]`, dialog `[data-testid=ui-modal-dialog]`, overlay `[data-testid=ui-modal-overlay]`, close `button[data-testid=ui-modal-close-button]`                                                           | —                                                                                   |
+| Accordion     | accordion headers/sections                                                                                                                                                                                                                | —                                                                                   |
+| Tabs          | tab buttons                                                                                                                                                                                                                               | `[data-testid=ui-tabs-output]`                                                      |
 
 ### Feedback & Navigation
 
-| Block (h3)      | Control                                                                                       | Output box                            |
-| --------------- | --------------------------------------------------------------------------------------------- | ------------------------------------- |
-| Progress Bar    | `div[data-testid=ui-progress-bar]`, `button[data-testid=ui-progress-start-button]`            | `[data-testid=ui-progress-value]`     |
-| Star Rating     | star buttons                                                                                   | —                                     |
-| Pagination      | `button[data-testid=ui-pagination-prev-button]`, `button[data-testid=ui-pagination-next-button]` | `[data-testid=ui-pagination-output]` |
-| Data Table      | sortable headers `button[data-testid=ui-data-table-sort-name]`, `button[data-testid=ui-data-table-sort-price]` | —           |
-| Search Input    | `input[data-testid=ui-search-input]`                                                           | `[data-testid=ui-search-results]`      |
-| Toast           | `button[data-testid=ui-toast-button]`                                                         | —                                     |
-| Tooltip         | `span[data-testid=ui-tooltip-trigger]`                                                         | —                                     |
+| Block (h3)   | Control                                                                                                        | Output box                           |
+| ------------ | -------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| Progress Bar | `div[data-testid=ui-progress-bar]`, `button[data-testid=ui-progress-start-button]`                             | `[data-testid=ui-progress-value]`    |
+| Star Rating  | star buttons                                                                                                   | —                                    |
+| Pagination   | `button[data-testid=ui-pagination-prev-button]`, `button[data-testid=ui-pagination-next-button]`               | `[data-testid=ui-pagination-output]` |
+| Data Table   | sortable headers `button[data-testid=ui-data-table-sort-name]`, `button[data-testid=ui-data-table-sort-price]` | —                                    |
+| Search Input | `input[data-testid=ui-search-input]`                                                                           | `[data-testid=ui-search-results]`    |
+| Toast        | `button[data-testid=ui-toast-button]`                                                                          | —                                    |
+| Tooltip      | `span[data-testid=ui-tooltip-trigger]`                                                                         | —                                    |
 
 ## Locator strategy notes
 

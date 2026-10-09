@@ -1,6 +1,12 @@
 import { BaseCoordinator } from '../../base/base-coordinator';
 import type { ValidationResult } from '../../base/validation-result';
-import { RADIO_OPTIONS, UiElementsActor, type RadioOption } from './ui-elements-actor';
+import {
+  COUNTRY_OPTIONS,
+  RADIO_OPTIONS,
+  UiElementsActor,
+  type CountryOption,
+  type RadioOption,
+} from './ui-elements-actor';
 import type { UiElementsPage } from './ui-elements-page';
 import { UiElementsValidator } from './ui-elements-validator';
 
@@ -44,6 +50,80 @@ export class UiElementsCoordinator extends BaseCoordinator<UiElementsPage> {
       this.actor.selectRadioOption(option);
       this.expectValid(this.validator.radioOutputShows(option));
     }
+  }
+
+  verifyDropdownTracksEachSelection(options: readonly CountryOption[] = COUNTRY_OPTIONS): void {
+    this.open();
+    for (const option of options) {
+      this.actor.selectCountry(option);
+      this.expectValid(this.validator.dropdownOutputShows(option));
+    }
+  }
+
+  verifyDropdownResetsToDefault(): void {
+    this.open();
+    this.actor.selectCountry('US');
+    this.expectValid(this.validator.dropdownOutputShows('US'));
+    this.actor.resetDropdown();
+    this.expectValid(this.validator.dropdownOutputShowsDefault());
+  }
+
+  verifySliderReflectsNewValue(value: number): void {
+    this.open();
+    this.actor.setSlider(value);
+    this.expectValid(this.validator.sliderOutputShows(value));
+  }
+
+  verifySliderTracksBoundaryValues(min = 0, max = 100): void {
+    this.open();
+    for (const value of [min, max]) {
+      this.actor.setSlider(value);
+      this.expectValid(this.validator.sliderOutputShows(value));
+    }
+  }
+
+  verifySwitchOutputTracksState(): void {
+    this.open();
+    this.actor.toggleSwitch(true);
+    this.expectValid(this.validator.switchOutputShows(true));
+    this.actor.toggleSwitch(false);
+    this.expectValid(this.validator.switchOutputShows(false));
+  }
+
+  verifySwitchEndsOnAfterRapidToggles(): void {
+    this.open();
+    for (const state of [true, false, true]) {
+      this.actor.toggleSwitch(state);
+      this.expectValid(this.validator.switchOutputShows(state));
+    }
+  }
+
+  verifyDateInputShowsSelectedDate(isoDate: string): void {
+    this.open();
+    this.actor.selectDate(isoDate);
+    this.expectValid(this.validator.dateOutputShows(isoDate));
+  }
+
+  verifyDateInputClearsToDefault(isoDate = '2026-10-08'): void {
+    this.open();
+    this.actor.selectDate(isoDate);
+    this.expectValid(this.validator.dateOutputShows(isoDate));
+    this.actor.clearDate();
+    this.expectValid(this.validator.dateOutputShowsNone());
+  }
+
+  verifySelectionControlsUpdateIndependently(
+    country: CountryOption,
+    sliderValue: number,
+    switchOn: boolean,
+  ): void {
+    this.open();
+    this.actor.selectCountry(country);
+    this.actor.setSlider(sliderValue);
+    this.actor.toggleSwitch(switchOn);
+    this.expectValid(this.validator.dropdownOutputShows(country));
+    this.expectValid(this.validator.sliderOutputShows(sliderValue));
+    this.expectValid(this.validator.switchOutputShows(switchOn));
   }
 
   private expectValid(result: Cypress.Chainable<ValidationResult>): void {

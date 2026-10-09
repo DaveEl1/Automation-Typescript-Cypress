@@ -40,4 +40,36 @@ export class UiElementsLocators extends BaseLocators {
   radioOutput() {
     return this.page.getByTestId('ui-radio-group-output');
   }
+
+  dropdown() {
+    return this.page.getByTestId('ui-single-dropdown');
+  }
+
+  dropdownOutput() {
+    return this.page.getByTestId('ui-output-single-dropdown');
+  }
+
+  slider() {
+    return this.page.getByTestId('ui-slider');
+  }
+
+  sliderOutput() {
+    return this.page.getByTestId('ui-slider-output');
+  }
+
+  toggleSwitch() {
+    return this.page.getByTestId('ui-toggle-switch');
+  }
+
+  toggleSwitchOutput() {
+    return this.page.getByTestId('ui-output-toggle-switch');
+  }
+
+  dateInput() {
+    return this.page.getByTestId('ui-date-input');
+  }
+
+  dateOutput() {
+    return this.page.getByTestId('ui-date-output');
+  }
 }

@@ -123,7 +123,7 @@ Status: items 1–6 done; `ui-elements.cy.ts` verified against the live site (4 
 
 Same pattern as Phase 2 (one TC per block: set control → assert output box).
 
-1. [ ] Extend locators/actor/validator/coordinator for: dropdown select, slider, toggle switch, date picker
+1. [x] Extend locators/actor/validator/coordinator for: dropdown select, slider, toggle switch, date picker
 2. [ ] Then composite widgets: color picker, file upload (needs a `.txt` fixture in `cypress/fixtures/`), textarea, range input, time picker
 3. [ ] Add matching tests to `ui-elements.cy.ts`
 
@@ -181,4 +181,5 @@ Validation-focused; all forms are `novalidate`, so expected messages must be cap
 - Phase 0: complete (2026-10-07) — scaffolding, config, docs ported, smoke spec green
 - Phase 1: complete (2026-10-07) — base classes (`i-page`, `page-factory`, `base-*`) and raw actions in `src/framework/base/`
 - Phase 2: complete (2026-10-08) — UI Elements basic-elements stack + `ui-elements.cy.ts` green (TC-UIE-01/02/03); stopping for review before Phase 3
-- Phases 3–6: pending
+- Phase 3: in progress — item 1 complete (2026-10-09): dropdown/slider/toggle/date-picker locators, actors, validators and coordinators added and verified against the live DOM (`ui-elements.cy.ts` 13 passing; new `set-value` action sets values React-safely, `setChecked` accepts `{ force: true }` for the CSS-hidden switch input, site-notes corrected). Items 2–3 (composite widgets + their tests) pending; stopping for review
+- Phases 4–6: pending

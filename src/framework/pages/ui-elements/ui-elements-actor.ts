@@ -1,5 +1,7 @@
 import { BaseActor } from '../../base/base-actor';
 import { click } from '../../base/actions/click';
+import { selectOption } from '../../base/actions/select';
+import { setValue } from '../../base/actions/set-value';
 import { setChecked } from '../../base/actions/toggle';
 import { typeText } from '../../base/actions/type-text';
 import type { UiElementsLocators } from './ui-elements-locators';
@@ -12,6 +14,9 @@ export const RADIO_LABELS: Record<RadioOption, string> = {
   quarterly: 'Quarterly',
   annual: 'Annual',
 };
+
+export const COUNTRY_OPTIONS = ['US', 'Canada', 'UK', 'India', 'Australia'] as const;
+export type CountryOption = (typeof COUNTRY_OPTIONS)[number];
 
 export class UiElementsActor extends BaseActor<UiElementsLocators> {
   typeIntoTextField(text: string): void {
@@ -28,5 +33,29 @@ export class UiElementsActor extends BaseActor<UiElementsLocators> {
 
   selectRadioOption(option: RadioOption): void {
     click(this.locators.radioOption(option));
+  }
+
+  selectCountry(option: CountryOption): void {
+    selectOption(this.locators.dropdown(), option);
+  }
+
+  resetDropdown(): void {
+    selectOption(this.locators.dropdown(), '');
+  }
+
+  setSlider(value: number): void {
+    setValue(this.locators.slider(), value);
+  }
+
+  toggleSwitch(on: boolean): void {
+    setChecked(this.locators.toggleSwitch(), on, { force: true });
+  }
+
+  selectDate(isoDate: string): void {
+    setValue(this.locators.dateInput(), isoDate);
+  }
+
+  clearDate(): void {
+    setValue(this.locators.dateInput(), '');
   }
 }

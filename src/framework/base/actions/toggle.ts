@@ -1,9 +1,17 @@
 import type { Element } from '../i-page';
 
-export function setChecked(element: Element, checked = true): void {
+export interface SetCheckedOptions {
+  force?: boolean;
+}
+
+export function setChecked(
+  element: Element,
+  checked = true,
+  options: SetCheckedOptions = {},
+): void {
   if (checked) {
-    element.check();
+    element.check(options);
   } else {
-    element.uncheck();
+    element.uncheck(options);
   }
 }
