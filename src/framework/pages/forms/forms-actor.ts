@@ -17,6 +17,10 @@ export class FormsActor extends BaseActor<FormsLocators> {
     typeText(this.locators.signInPassword(), password);
   }
 
+  fillSignInEmail(email: string): void {
+    typeText(this.locators.signInEmail(), email);
+  }
+
   setRememberMe(enabled: boolean): void {
     setChecked(this.locators.signInRememberMe(), enabled);
   }

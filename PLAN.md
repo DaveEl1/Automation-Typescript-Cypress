@@ -134,17 +134,17 @@ Same pattern as Phase 2 (one TC per block: set control → assert output box).
 Validation-focused; all forms are `novalidate`, so expected messages must be captured empirically first (probe each form, record in site-notes).
 
 1. [x] `forms-locators.ts`, `forms-page.ts`, `forms-actor.ts`, `forms-validator.ts`, `forms-coordinator.ts` — 30 coordinator verify methods, one per probed scenario; navigation goes through `goToSection` (SPA has no router, `visit('/forms')` renders Home). Messages probed empirically 2026-10-09 (32 scenarios) and recorded in site-notes; wiring verified live via a temporary driver spec exercising every method (8/8 green), then removed
-2. [ ] `cypress/e2e/form.cy.ts`:
-   - [ ] TC-FRM-01 Sign in: valid credentials succeed; short/empty password shows validation message
-   - [ ] TC-FRM-02 Create account: empty submit → required-field messages; short/mismatched password rejected; valid submit succeeds
-   - [ ] TC-FRM-03 Contact us: required fields enforced; subject defaults to General
-   - [ ] TC-FRM-04 Choose a plan: defaults (pro/monthly) reflected after subscribe
-   - [ ] TC-FRM-05 Card payment: invalid card rejected; `4242 4242 4242 4242` accepted
-   - [ ] TC-FRM-06 Quick survey: rating + recommendation required; optional comments skipped
-   - [ ] TC-FRM-07 Account settings: save persists checkbox/select state in confirmation
-   - [ ] TC-FRM-08 Search & filter: filters apply without error (assert app feedback)
+2. [x] `cypress/e2e/form.cy.ts`:
+   - [x] TC-FRM-01 Sign in: valid credentials succeed; short/empty password shows validation message
+   - [x] TC-FRM-02 Create account: empty submit → required-field messages; short/mismatched password rejected; valid submit succeeds
+   - [x] TC-FRM-03 Contact us: required fields enforced; subject defaults to General
+   - [x] TC-FRM-04 Choose a plan: defaults (pro/monthly) reflected after subscribe
+   - [x] TC-FRM-05 Card payment: invalid card rejected; `4242 4242 4242 4242` accepted
+   - [x] TC-FRM-06 Quick survey: rating + recommendation required; optional comments skipped
+   - [x] TC-FRM-07 Account settings: save persists checkbox/select state in confirmation
+   - [x] TC-FRM-08 Search & filter: filters apply without error (assert app feedback)
 
-**Verify:** `npx cypress run --spec cypress/e2e/form.cy.ts` green.
+**Verify:** `npx cypress run --spec cypress/e2e/form.cy.ts` green. Done 2026-10-09: 8 passing, full suite 26 passing. One addition over item 1: `fillSignInEmail` actor + `verifySignInRejectsMissingPassword` coordinator method, because `cy.type()` rejects empty strings (the empty-password case types nothing into a freshly empty field)
 
 ## Phase 5 — Products CRUD (`pages/products/`)
 
@@ -182,5 +182,5 @@ Validation-focused; all forms are `novalidate`, so expected messages must be cap
 - Phase 1: complete (2026-10-07) — base classes (`i-page`, `page-factory`, `base-*`) and raw actions in `src/framework/base/`
 - Phase 2: complete (2026-10-08) — UI Elements basic-elements stack + `ui-elements.cy.ts` green (TC-UIE-01/02/03); stopping for review before Phase 3
 - Phase 3: complete (2026-10-09) — selection controls (dropdown/slider/toggle/date picker) + composite widgets (text area/file upload) implemented and verified against the live DOM; `ui-elements.cy.ts` covers TC-UIE-04..09 (17 tests total in spec, 18 with smoke, all green); color picker/time picker absent from the page, range input = slider (recorded in site-notes + test-plan). New actions: `set-value`, `attach-file`, `clear-field`, `element-exists`; `setChecked` gained `{ force: true }` for the CSS-hidden switch
-- Phase 4: item 1 done (2026-10-09) — forms stack (`src/framework/pages/forms/`, 5 files, 30 coordinator verify methods) verified live via temporary driver spec (8/8) + full suite 18/18 green; 32 observed messages probed and recorded in site-notes; stopping for review before item 2 (`form.cy.ts`)
+- Phase 4: complete (2026-10-09) — forms stack (`src/framework/pages/forms/`, 5 files, 31 verify methods) + `form.cy.ts` covering TC-FRM-01..08 (8 tests); 32 observed messages probed and recorded in site-notes; full suite 26/26 green
 - Phases 5–6: pending

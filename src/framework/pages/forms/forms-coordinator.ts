@@ -57,6 +57,13 @@ export class FormsCoordinator extends BaseCoordinator<FormsPage> {
     this.expectValid(this.validator.signInResultShows('Password must be at least 8 characters.'));
   }
 
+  verifySignInRejectsMissingPassword(email = 'ada@example.com'): void {
+    this.open();
+    this.actor.fillSignInEmail(email);
+    this.actor.submitSignIn();
+    this.expectValid(this.validator.signInResultShows('Password must be at least 8 characters.'));
+  }
+
   verifySignInSucceedsWithValidCredentials(
     email: string,
     password: string,

@@ -47,16 +47,16 @@ Dropdown select, slider, toggle switch, date picker (Selection Controls); color 
 
 Validation-focused; all forms are `novalidate`, so expected messages come from app code and must be captured empirically first.
 
-| ID        | Form             | Focus                                                                                                         | Status  |
-| --------- | ---------------- | ------------------------------------------------------------------------------------------------------------- | ------- |
-| TC-FRM-01 | Sign in          | Valid credentials (any email + password ≥ 8) succeed; short/empty password shows validation message           | pending |
-| TC-FRM-02 | Create account   | Submit empty → required-field messages; short password and mismatched confirm rejected; valid submit succeeds | pending |
-| TC-FRM-03 | Contact us       | Required fields enforced; subject select defaults to General                                                  | pending |
-| TC-FRM-04 | Choose a plan    | Defaults (pro/monthly) reflected in output/confirmation after subscribe                                       | pending |
-| TC-FRM-05 | Card payment     | Invalid card number rejected; 4242 4242 4242 4242 accepted per hint                                           | pending |
-| TC-FRM-06 | Quick survey     | Rating + recommendation required; optional comments skipped                                                   | pending |
-| TC-FRM-07 | Account settings | Save persists checkbox/select state in output/confirmation                                                    | pending |
-| TC-FRM-08 | Search & filter  | Filters apply without error (no results table on this page — assert app feedback)                             | pending |
+| ID        | Form             | Focus                                                                                                         | Status          |
+| --------- | ---------------- | ------------------------------------------------------------------------------------------------------------- | --------------- |
+| TC-FRM-01 | Sign in          | Valid credentials (any email + password ≥ 8) succeed; short/empty password shows validation message           | done 2026-10-09 |
+| TC-FRM-02 | Create account   | Submit empty → required-field messages; short password and mismatched confirm rejected; valid submit succeeds | done 2026-10-09 |
+| TC-FRM-03 | Contact us       | Required fields enforced; subject select defaults to General                                                  | done 2026-10-09 |
+| TC-FRM-04 | Choose a plan    | Defaults (pro/monthly) reflected in output/confirmation after subscribe                                       | done 2026-10-09 |
+| TC-FRM-05 | Card payment     | Invalid card number rejected; 4242 4242 4242 4242 accepted per hint                                           | done 2026-10-09 |
+| TC-FRM-06 | Quick survey     | Rating + recommendation required; optional comments skipped                                                   | done 2026-10-09 |
+| TC-FRM-07 | Account settings | Save persists checkbox/select state in output/confirmation                                                    | done 2026-10-09 |
+| TC-FRM-08 | Search & filter  | Filters apply without error (no results table on this page — assert app feedback)                             | done 2026-10-09 |
 
 ### Phase 5 — Products CRUD
 
