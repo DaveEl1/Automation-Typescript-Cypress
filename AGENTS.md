@@ -32,14 +32,14 @@ Dependencies are npm packages declared in `package.json`. `REQUIREMENTS.md` is t
 
 ## Commands
 
-- All tests: `npm run test` (runs all specs via `cypress run`)
-- Single spec: `npx cypress run --spec cypress/e2e/smoke.cy.ts`
-- Interactive runner: `npm run test:open`
+- All tests: `npm run test` (runs all specs in Chrome via `cypress run --browser chrome`)
+- Single spec: `npx cypress run --browser chrome --spec cypress/e2e/smoke.cy.ts`
+- Interactive runner: `npm run test:open` (opens e2e testing in Chrome)
 - Typecheck: `npm run typecheck`; Lint: `npm run lint`; Format: `npm run format`
 
 ## Setup gotchas
 
-- Node 20+ LTS required. E2e runs use Chrome, pinned in `cypress.config.ts`; if it is missing, install it or override with `--browser`. Cypress's bundled Electron browser installs automatically on first run; verify with `npx cypress verify`. If tests fail with "browser not found", re-run that (or `npx cypress cache prune` and reinstall).
+- Node 20+ LTS required. E2e runs use Chrome, pinned via `--browser chrome` in the `test` / `test:open` npm scripts (Cypress config files can't set a browser); if it is missing, install it or run `npx cypress run` with a different `--browser`. Cypress's bundled Electron browser installs automatically on first run; verify with `npx cypress verify`. If tests fail with "browser not found", re-run that (or `npx cypress cache prune` and reinstall).
 - Browsers live in `%LOCALAPPDATA%\Cypress\Cache` — outside the repo, so nothing to gitignore for them.
 - The Reach Catalog dev server must be running at http://localhost:5173/ before any spec runs.
 
@@ -47,4 +47,4 @@ Dependencies are npm packages declared in `package.json`. `REQUIREMENTS.md` is t
 
 Target is the local SPA "Reach Catalog" at http://localhost:5173/; `docs/site-notes.md` documents all four sections (locators, fields, observed behavior) and `docs/test-plan.md` holds the phased test cases.
 
-Phase 0 complete (2026-10-07); Phase 1 complete (2026-10-08): base classes, actions, home page stack, smoke spec green. Phase 2 basic elements complete (2026-10-08): full UI Elements stack + `ui-elements.cy.ts` green (TC-UIE-01/02/03). Phase 3 complete (2026-10-09): selection controls + composite widgets (text area/file upload) with `ui-elements.cy.ts` green (17 tests, TC-UIE-04..09); color picker/time picker don't exist on the page. Phase 4 complete (2026-10-09): forms stack (`src/framework/pages/forms/`, 31 verify methods) + `form.cy.ts` covering TC-FRM-01..08 (8 tests); all 32 observed messages recorded in `docs/site-notes.md`; full suite 26/26 green. Stopping for review before Phase 5 per `PLAN.md`.
+Phase 0 complete (2026-10-07); Phase 1 complete (2026-10-08): base classes, actions, smoke spec green. There is no home page stack yet — `smoke.cy.ts` is a scaffold check that calls `cy` directly; the home stack and `home.cy.ts` are Phase 6 in `PLAN.md`, at which point the smoke spec should move onto a home coordinator. Phase 2 basic elements complete (2026-10-08): full UI Elements stack + `ui-elements.cy.ts` green (TC-UIE-01/02/03). Phase 3 complete (2026-10-09): selection controls + composite widgets (text area/file upload) with `ui-elements.cy.ts` green (17 tests, TC-UIE-04..09); color picker/time picker don't exist on the page. Phase 4 complete (2026-10-09): forms stack (`src/framework/pages/forms/`, 31 verify methods) + `form.cy.ts` covering TC-FRM-01..08 (8 tests); all 32 observed messages recorded in `docs/site-notes.md`; full suite 26/26 green. Stopping for review before Phase 5 per `PLAN.md`.

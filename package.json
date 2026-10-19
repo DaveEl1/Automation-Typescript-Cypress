@@ -4,13 +4,13 @@
   "description": "Cypress + TypeScript E2E test framework for the Reach Catalog SPA (http://localhost:5173/)",
   "private": true,
   "scripts": {
-    "test": "cypress run",
-    "test:open": "cypress open",
+    "test": "cypress run --browser chrome",
+    "test:open": "cypress open --e2e --browser chrome",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@testing-library/cypress": "^10.1.3",
