@@ -1,5 +1,11 @@
 node_modules/
 cypress/videos/
 cypress/screenshots/
-package-lock.json
+cypress/downloads/
 **/.gitkeep
+
+# Local secrets / environment overrides (CYPRESS_* values, record keys)
+.env
+.env.*
+!.env.example
+cypress.env.json
